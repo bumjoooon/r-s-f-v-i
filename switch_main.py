@@ -5,6 +5,7 @@ from hangul_utils import join_jamos
 import numpy as np           #numpy는 행렬,배열에 이용할 함수
 
 import switch_button_input
+import switch_button_revise
 
 
 
@@ -26,14 +27,13 @@ jungsung_index = ""
 jongsung_index = ""
 sung_index = ""
 
-
-
 chosung = ['ㄱ','ㄲ','ㄴ','ㄷ','ㄸ','ㄹ','ㅁ','ㅂ','ㅃ','ㅅ','ㅆ','ㅇ','ㅈ','ㅉ','ㅊ','ㅋ','ㅌ','ㅍ','ㅎ']
 jungsung = ['ㅏ','ㅐ','ㅑ','ㅒ','ㅓ','ㅔ','ㅕ','ㅖ','ㅗ','ㅘ','ㅙ','ㅚ','ㅛ','ㅜ','ㅝ','ㅞ','ㅟ','ㅠ','ㅡ','ㅢ','ㅣ']
 jongsung = ['ㄱ','ㄲ','ㄳ','ㄴ','ㄵ','ㄶ','ㄷ','ㄹ','ㄺ','ㄻ','ㄼ','ㄽ','ㄾ','ㄿ','ㅀ','ㅁ','ㅄ','ㅅ','ㅆ','ㅇ','ㅈ','ㅊ','ㅋ','ㅌ','ㅍ','ㅎ']
 #한글 유니코드 다 적어야 하나??
 hangul = []
 jamo_index = []
+jamo_join_input = ''            #다음버튼 누르면 어딘가에 저장될 최종 문자
 
 
 #유니코드 중에서 초성 19개, 중성 21개, 종성 28개 ,,,, 다시 알아보기
@@ -112,7 +112,7 @@ try:
                                 sung_index.append(sung)                                          #설정된 자음 sung_index에 추가
                                 
                                 
-                                jamo_join_final = jamo_assemble(sung_index)                      #sung_index에 저장된 글자 합치기 #이부분 불안함 자음모음 따로 들어오면 어카지..;;
+                                jamo_join_input = jamo_assemble(sung_index)                      #sung_index에 저장된 글자 합치기 #이부분 불안함 자음모음 따로 들어오면 어카지..;;
                                 #jamo-join_final 읽어주기       
                                 
                                 
@@ -125,16 +125,15 @@ try:
                                 sung = switch_button_input.push_Button_input_vowel(count_updown)
                                 sung_index.append(sung)
                                 
-                                jamo_join_final = jamo_assemble(sung_index)
+                                jamo_join_input = jamo_assemble(sung_index)
                                 #jamo-join_final 읽어주기
 
                         
                                 
                                 
                         else  :
-                                
-                                input_num = count_updown
-                                #input_num 읽어주기
+                                num_input = count_updown
+                                #num_input 읽어주기
                                 
                                               
                         
@@ -159,10 +158,11 @@ try:
                                 
                                 
                         else :
+                                break                                                               #수정해야됨!!!
                                 #count_updown 읽어주기
                                 
                                 
-                if GPIO.event_detected(Button_down):                                                 # 왜틀렸징;;
+                if GPIO.event_detected(Button_down):                                                 
                         count_updown = count_updown - 1
 
                         if input_mode == 1:
@@ -176,13 +176,21 @@ try:
                                 
                                 
                         else :
+                                break                                   #!!!!수정해야됨!! 임시로 적어둔 것
                                 #count_updown 읽어주기
                 
                 
                 
                 
                 if GPIO.event_detected(Button_revise):
-                
+                        
+                        if input_mode == 1 or 2:
+                                jamo_join_input = switch_button_revise.push_Button_revise_sung(jamo_join_input)
+                                
+                                
+                        else :
+                                num_input = switch_button_revise.push_Button_revise_num(num_input)
+
                 
                 
                 
@@ -221,9 +229,8 @@ try:
                         print ("Button was Not Pressed!")
                         
                 sleep(1)
-                
-                
-                
+
+
 except KeyboardInterrupt:      # CTRL-C를 누르면 발생 
         GPIO.cleanup()  #cleanup변수 뭔지 알아보기 
         

@@ -1,21 +1,54 @@
-import switch_main
+import switch_jamo_assemble
+from jamo import h2j, j2hcj
+import math
 
 
+
+
+# #test
+# sung_index_1 = ['ㄱ','ㅘ','ㄱ']
+# num  = 1524
+
+
+# #test        
+# a = switch_jamo_assemble.jamo_assemble(sung_index_1)
+# print(a)
+
+# a = j2hcj(h2j(a))
+# print(a)
+# a = a[:-1]
+# print(a)
 
 # input mode 에 따라 함수 다르게
 
 
-def push_Button_revise_sung(jamo_join_final):
+
+def push_Button_revise_sung(jamo_join_input):                          # 글자 해체해서 마지막 글자 지우기
     
-    size = len(jamo_join_final)                     # len 문자열 길이 설정
-    jamo_join_final = jamo_join_final[:size - 1]
-        
-    return jamo_join_final
+    jamo_join_input = j2hcj(h2j(jamo_join_input))
+    jamo_join_input = jamo_join_input[:-1]
+    
+    return jamo_join_input
     
     
-def push_Button_revise_num(input_num):
+def push_Button_revise_num(num_input):                                  # num_input받아서 1의 자릿수 내림 
     
-    size = len(input_num)                           
-    input_num = input_num[:size - 1]
+    num_input_revise = num_input / 10
+    num_input_revise = math.floor(num_input_revise)
+    num_input = num_input_revise
     
-    return input_num
+    return num_input
+
+
+
+# aa = push_Button_revise_sung(a)
+# print(aa)
+
+# bb = push_Button_revise_num(num)
+# print(bb)
+
+
+# cc = num/10
+# cc = math.floor(cc)
+# num = cc * 10
+# print(num)

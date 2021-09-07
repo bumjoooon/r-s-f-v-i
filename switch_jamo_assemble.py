@@ -15,10 +15,11 @@ from jamo import h2j, j2hcj
 
 
 
-gyup = ''
+gyup = ''                               #겹받침을 만들기 위해 새로운 문자열 변수
 
-#test
-sung_index_1 = ['ㄱ','ㅘ','ㄱ','ㅅ']
+
+##test
+# sung_index_1 = ['ㄱ','ㅘ','ㄱ']
 # sung_index_2 = ['ㄱ','ㅣ','ㅁ']
 # sung_index_3 = ['ㅁ','ㅏ','ㄹ','ㄱ']
 # sung_index_4 = ['ㅇ','ㅏ','ㄴ','ㅎ']
@@ -26,10 +27,12 @@ sung_index_1 = ['ㄱ','ㅘ','ㄱ','ㅅ']
 # sung_index_6 = ['ㄱ']
 
 
+
+
 def jamo_assemble(sung_index):
     
     jamo_join = ''.join(sung_index)
-    
+       
     
     if 'ㄱㅅ' in jamo_join:
         
@@ -41,12 +44,12 @@ def jamo_assemble(sung_index):
         
         jamo_join = jamo_join[0:2]
         print(jamo_join)
-        jamo_join_final = jamo_join + gyup
-        print(jamo_join_final)
+        jamo_join_input = jamo_join + gyup
+        print(jamo_join_input)
         
-        jamo_join_final = join_jamos(jamo_join_final)
+        jamo_join_input = join_jamos(jamo_join_input)
         
-        return(jamo_join_final)
+        return(jamo_join_input)
     
     elif 'ㄴㅈ' in jamo_join:
         
@@ -58,12 +61,12 @@ def jamo_assemble(sung_index):
         
         jamo_join = jamo_join[0:2]
         print(jamo_join)
-        jamo_join_final = jamo_join + gyup
-        print(jamo_join_final)
+        jamo_join_input = jamo_join + gyup
+        print(jamo_join_input)
         
-        jamo_join_final = join_jamos(jamo_join_final)
+        jamo_join_input = join_jamos(jamo_join_input)
         
-        return(jamo_join_final)
+        return(jamo_join_input)
     
     elif 'ㄴㅎ' in jamo_join:
         
@@ -75,12 +78,12 @@ def jamo_assemble(sung_index):
         
         jamo_join = jamo_join[0:2]
         print(jamo_join)
-        jamo_join_final = jamo_join + gyup
-        print(jamo_join_final)
+        jamo_join_input = jamo_join + gyup
+        print(jamo_join_input)
         
-        jamo_join_final = join_jamos(jamo_join_final)
+        jamo_join_input = join_jamos(jamo_join_input)
         
-        return(jamo_join_final)
+        return(jamo_join_input)
     
     elif 'ㄹㄱ' in jamo_join:
         
@@ -92,12 +95,12 @@ def jamo_assemble(sung_index):
         
         jamo_join = jamo_join[0:2]
         print(jamo_join)
-        jamo_join_final = jamo_join + gyup
-        print(jamo_join_final)
+        jamo_join_input = jamo_join + gyup
+        print(jamo_join_input)
         
-        jamo_join_final = join_jamos(jamo_join_final)
+        jamo_join_input = join_jamos(jamo_join_input)
         
-        return(jamo_join_final)
+        return(jamo_join_input)
     
     elif 'ㄹㅁ' in jamo_join:
         
@@ -109,12 +112,12 @@ def jamo_assemble(sung_index):
         
         jamo_join = jamo_join[0:2]
         print(jamo_join)
-        jamo_join_final = jamo_join + gyup
-        print(jamo_join_final)
+        jamo_join_input = jamo_join + gyup
+        print(jamo_join_input)
         
-        jamo_join_final = join_jamos(jamo_join_final)
+        jamo_join_input = join_jamos(jamo_join_input)
         
-        return(jamo_join_final)
+        return(jamo_join_input)
     
     elif 'ㄹㅂ' in jamo_join:
         
@@ -126,12 +129,12 @@ def jamo_assemble(sung_index):
         
         jamo_join = jamo_join[0:2]
         print(jamo_join)
-        jamo_join_final = jamo_join + gyup
-        print(jamo_join_final)
+        jamo_join_input = jamo_join + gyup
+        print(jamo_join_input)
         
-        jamo_join_final = join_jamos(jamo_join_final)
+        jamo_join_input = join_jamos(jamo_join_input)
         
-        return(jamo_join_final)
+        return(jamo_join_input)
     
     elif 'ㄹㅅ' in jamo_join:
         
@@ -143,12 +146,12 @@ def jamo_assemble(sung_index):
         
         jamo_join = jamo_join[0:2]
         print(jamo_join)
-        jamo_join_final = jamo_join + gyup
-        print(jamo_join_final)
+        jamo_join_input = jamo_join + gyup
+        print(jamo_join_input)
         
-        jamo_join_final = join_jamos(jamo_join_final)
+        jamo_join_input = join_jamos(jamo_join_input)
         
-        return(jamo_join_final)
+        return(jamo_join_input)
     
     elif 'ㄹㅌ' in jamo_join:
         
@@ -160,12 +163,12 @@ def jamo_assemble(sung_index):
         
         jamo_join = jamo_join[0:2]
         print(jamo_join)
-        jamo_join_final = jamo_join + gyup
-        print(jamo_join_final)
+        jamo_join_input = jamo_join + gyup
+        print(jamo_join_input)
         
-        jamo_join_final = join_jamos(jamo_join_final)
+        jamo_join_input = join_jamos(jamo_join_input)
         
-        return(jamo_join_final)
+        return(jamo_join_input)
     
     elif 'ㄹㅍ' in jamo_join:
         
@@ -177,12 +180,12 @@ def jamo_assemble(sung_index):
         
         jamo_join = jamo_join[0:2]
         print(jamo_join)
-        jamo_join_final = jamo_join + gyup
-        print(jamo_join_final)
+        jamo_join_input = jamo_join + gyup
+        print(jamo_join_input)
         
-        jamo_join_final = join_jamos(jamo_join_final)
+        jamo_join_input = join_jamos(jamo_join_input)
         
-        return(jamo_join_final)
+        return(jamo_join_input)
     
     elif 'ㄹㅎ' in jamo_join:
         
@@ -194,12 +197,12 @@ def jamo_assemble(sung_index):
         
         jamo_join = jamo_join[0:2]
         print(jamo_join)
-        jamo_join_final = jamo_join + gyup
-        print(jamo_join_final)
+        jamo_join_input = jamo_join + gyup
+        print(jamo_join_input)
         
-        jamo_join_final = join_jamos(jamo_join_final)
+        jamo_join_input = join_jamos(jamo_join_input)
         
-        return(jamo_join_final)
+        return(jamo_join_input)
     
     elif 'ㅂㅅ' in jamo_join:
         
@@ -211,31 +214,54 @@ def jamo_assemble(sung_index):
         
         jamo_join = jamo_join[0:2]
         print(jamo_join)
-        jamo_join_final = jamo_join + gyup
-        print(jamo_join_final)
+        jamo_join_input = jamo_join + gyup
+        print(jamo_join_input)
         
-        jamo_join_final = join_jamos(jamo_join_final)
+        jamo_join_input = join_jamos(jamo_join_input)
         
-        return(jamo_join_final)
+        return(jamo_join_input)
     
     else :
-        jamo_join_final = join_jamos(jamo_join)
+        jamo_join_input = join_jamos(jamo_join)
         
-        return jamo_join_final
+        return jamo_join_input
     
     
-            
-# #test        
-a = jamo_assemble(sung_index_1)
-print(a)
-a = j2hcj(h2j(a))
-print(a)
-list2 = list(a)
-print(list2)
-list3 = list[:-1]
-print(list3)
-a = a[:-1]
-print(a)
+
+
+
+
+
+
+           
+# # #test        
+# a = jamo_assemble(sung_index_1)
+# print(a)
+
+
+
+# test = int(input('plz type numb : '))
+# if test == 1:
+#     sung_index_1.append('ㅅ')
+#     aa = jamo_assemble(sung_index_1)
+#     print(aa)
+
+# else:
+#     print('다시')
+
+# #revise(수정)부분 test용
+# aa = j2hcj(h2j(aa))   
+# print(aa)
+# list2 = list(a)
+# print(list2)
+# list3 = list[:-1]
+# print(list3)'
+# aa = aa[:-1]
+# print(aa)
+    
+
+
+
 
 # b = jamo_assemble(sung_index_2)
 # print(b)
