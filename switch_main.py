@@ -2,6 +2,9 @@ from switch_jamo_assemble import jamo_assemble
 import RPi.GPIO as GPIO      # gpio 라이브러리
 from time import sleep       # sleep 라이브러리
 from hangul_utils import join_jamos 
+from jamo import j2h 
+from jamo import j2hcj
+
 import numpy as np           #numpy는 행렬,배열에 이용할 함수
 
 import switch_button_input
@@ -25,7 +28,10 @@ input_mode = 0        #mode  1: 자음 2: 모음 3: 숫자
 chosung_index = ""       #문자열로 선언 해주어야 하나
 jungsung_index = ""
 jongsung_index = ""
-sung_index = ""
+sung_index_1 = []
+sung_index_2 = []
+sung_index_3 = []
+sung_index_4 = []
 
 chosung = ['ㄱ','ㄲ','ㄴ','ㄷ','ㄸ','ㄹ','ㅁ','ㅂ','ㅃ','ㅅ','ㅆ','ㅇ','ㅈ','ㅉ','ㅊ','ㅋ','ㅌ','ㅍ','ㅎ']
 jungsung = ['ㅏ','ㅐ','ㅑ','ㅒ','ㅓ','ㅔ','ㅕ','ㅖ','ㅗ','ㅘ','ㅙ','ㅚ','ㅛ','ㅜ','ㅝ','ㅞ','ㅟ','ㅠ','ㅡ','ㅢ','ㅣ']
@@ -34,6 +40,7 @@ jongsung = ['ㄱ','ㄲ','ㄳ','ㄴ','ㄵ','ㄶ','ㄷ','ㄹ','ㄺ','ㄻ','ㄼ','�
 hangul = []
 jamo_index = []
 jamo_join_input = ''            #다음버튼 누르면 어딘가에 저장될 최종 문자
+jamo_join_input_index = []      #글자가 완성되면 저장
 
 
 #유니코드 중에서 초성 19개, 중성 21개, 종성 28개 ,,,, 다시 알아보기
@@ -104,41 +111,55 @@ try:
                 
                                 
                 if GPIO.event_detected(Button_input):
+                        
+                        #count_updown 숫자에 따라 자음 설정
                         if input_mode == 1 :
                                 
 
-                                sung = switch_button_input.push_Button_input_conso(count_updown) #count_updown 숫자에 따라 자음 설정
+                                sung = switch_button_input.push_Button_input_conso(count_updown) 
                                 
                                 sung_index.append(sung)                                          #설정된 자음 sung_index에 추가
                                 
                                 
-                                jamo_join_input = jamo_assemble(sung_index)                      #sung_index에 저장된 글자 합치기 #이부분 불안함 자음모음 따로 들어오면 어카지..;;
+                                                     
+                                
+                                
                                 #jamo-join_final 읽어주기       
                                 
                                 
                                 
-                        
-                        
+                                                
                         
                         elif input_mode == 2 :
                                 
                                 sung = switch_button_input.push_Button_input_vowel(count_updown)
                                 sung_index.append(sung)
                                 
-                                jamo_join_input = jamo_assemble(sung_index)
                                 #jamo-join_final 읽어주기
 
                         
                                 
                                 
-                        else  :
-                                num_input = count_updown
+                        else  :                                                 #숫자 input
+                                num_input = switch_button_input.push_Button_input_num(num_input,count_updown)                   #num_input이 처음엔 빈 공백으로 있으면 어떻게 되는가???
                                 #num_input 읽어주기
-                                
-                                              
+                         
                         
+                        
+
+                
+                        
+                                              
+                        #글자가 완성되면 jamo_join_input_index에 저장
+                        if ord(jamo_join_input) >= 44032 and ord(jamo_join_input) <= 55203:                                            
+                                jamo_join_input_index.append(jamo_join_input)
+                                jamo_join_input = ''
+
+                        else :
+                                break
                         
                         count_updown = 0
+                
                 
                 
                 

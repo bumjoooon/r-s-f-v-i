@@ -3,6 +3,9 @@ from time import sleep       # sleep 라이브러리
 from hangul_utils import join_jamos 
 import numpy as np           #numpy는 행렬,배열에 이용할 함수
 
+import switch_button_revise
+
+
 #import switch_main
 
 # #test
@@ -11,6 +14,12 @@ import numpy as np           #numpy는 행렬,배열에 이용할 함수
 
 
 sung_index = []
+num_index  = []
+
+
+# #test
+# num_input = 90
+# count_updown = 4
 
 
 chosung = ['ㄱ','ㄲ','ㄴ','ㄷ','ㄸ','ㄹ','ㅁ','ㅂ','ㅃ','ㅅ','ㅆ','ㅇ','ㅈ','ㅉ','ㅊ','ㅋ','ㅌ','ㅍ','ㅎ']
@@ -34,4 +43,29 @@ def push_Button_input_vowel(count_updown):
         return vowel_index
         
         
+def push_Button_input_num(num_input,count_updown):
         
+        num_input = str(num_input) + str(count_updown)
+        num_input = int(num_input)
+        # print(num_input)
+        
+        return num_input
+        
+        
+
+
+
+# #test
+# num_input = push_Button_input_num(num_input,count_updown)
+# print('num_input : ',num_input)
+
+# num_input = push_Button_input_num(num_input,count_updown)
+# print('num_input : ',num_input)
+
+        
+# num_input = switch_button_revise.push_Button_revise_num(num_input)
+# print('num_input : ',num_input)
+
+
+# num_input = switch_button_revise.push_Button_revise_num(num_input)
+# print('num_input : ',num_input)

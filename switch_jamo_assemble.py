@@ -18,17 +18,21 @@ from jamo import h2j, j2hcj
 gyup = ''                               #겹받침을 만들기 위해 새로운 문자열 변수
 
 
-##test
-# sung_index_1 = ['ㄱ','ㅘ','ㄱ']
+#test
+sung_index_1 = ['ㄱ','ㅘ','ㄱ']
 # sung_index_2 = ['ㄱ','ㅣ','ㅁ']
 # sung_index_3 = ['ㅁ','ㅏ','ㄹ','ㄱ']
 # sung_index_4 = ['ㅇ','ㅏ','ㄴ','ㅎ']
 # sung_index_5 = ['ㅅ','ㅔ']
 # sung_index_6 = ['ㄱ']
+sung_index_7 = ['ㄱ','ㅣ','ㄱ','ㅅ','ㅏ']
+
+jamo_join_input_index = []
 
 
 
 
+#겹받침 합쳐주기 !한 글자!
 def jamo_assemble(sung_index):
     
     jamo_join = ''.join(sung_index)
@@ -233,11 +237,33 @@ def jamo_assemble(sung_index):
 
 
 
-           
-# # #test        
-# a = jamo_assemble(sung_index_1)
-# print(a)
 
+
+
+
+
+           
+# #test        
+a = jamo_assemble(sung_index_1)
+print(a)
+
+jamo_join_input = jamo_assemble(sung_index_1)
+
+                                              
+print(ord(jamo_join_input))        
+
+if ord(jamo_join_input) >= 44032 and ord(jamo_join_input) <= 55203:                                               #글자가 완성되면 jamo_join_input_index에 저장
+        jamo_join_input_index.append(jamo_join_input)
+        jamo_join_input = ''
+
+
+print(jamo_join_input)
+print(jamo_join_input_index)
+# else :
+#         break
+                        
+
+count_updown = 0
 
 
 # test = int(input('plz type numb : '))
@@ -277,3 +303,6 @@ def jamo_assemble(sung_index):
 
 # f = jamo_assemble(sung_index_6)
 # print(f)
+
+g = jamo_assemble(sung_index_7)
+print(g)
