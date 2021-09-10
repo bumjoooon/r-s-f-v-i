@@ -22,7 +22,9 @@ import math
 # input mode 에 따라 함수 다르게
 
 
-def push_Button_revise_sung(jamo_join_input):                          # 글자 해체해서 마지막 글자 지우기 
+def push_Button_revise_sung(jamo_join_input_index):                          # 글자 해체해서 마지막 글자 지우기 
+    
+    jamo_join_input = ''.join(jamo_join_input_index)
     
     jamo_join_input = j2hcj(h2j(jamo_join_input))
     jamo_join_input = jamo_join_input[:-1]
