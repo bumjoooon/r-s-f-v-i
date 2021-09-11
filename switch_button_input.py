@@ -1,3 +1,7 @@
+#-*-coding: utf-8-*-
+
+#-*-coding: euc-kr-*-
+
 #import RPi.GPIO as GPIO      # gpio 라이브러리
 from time import sleep       # sleep 라이브러리
 from hangul_utils import join_jamos 
@@ -22,8 +26,8 @@ num_index  = []
 # count_updown = 4
 
 
-chosung = ['ㄱ','ㄲ','ㄴ','ㄷ','ㄸ','ㄹ','ㅁ','ㅂ','ㅃ','ㅅ','ㅆ','ㅇ','ㅈ','ㅉ','ㅊ','ㅋ','ㅌ','ㅍ','ㅎ']
-jungsung = ['ㅏ','ㅐ','ㅑ','ㅒ','ㅓ','ㅔ','ㅕ','ㅖ','ㅗ','ㅘ','ㅛ','ㅜ','ㅝ','ㅞ','ㅟ','ㅠ','ㅡ','ㅢ','ㅣ']
+chosung = ['ㄱ','ㄲ','ㄴ','ㄷ','ㄸ','ㄹ','ㅁ','ㅂ','ㅃ','ㅅ','ㅆ','ㅇ','ㅈ','ㅉ','ㅊ','ㅋ','ㅌ','ㅍ','ㅎ']      #19개
+jungsung = ['ㅏ','ㅐ','ㅑ','ㅒ','ㅓ','ㅔ','ㅕ','ㅖ','ㅗ','ㅘ','ㅙ','ㅚ','ㅛ','ㅜ','ㅝ','ㅞ','ㅟ','ㅠ','ㅡ','ㅢ','ㅣ']     #21ㄴ개
 
 
 
@@ -32,6 +36,7 @@ def push_Button_input_conso(count_updown):                      #count_updown �
         conso_index = chosung[count_updown]
         
         print(conso_index)
+                #음성출력 코드 추가하기
         return conso_index
         
         
@@ -40,6 +45,7 @@ def push_Button_input_vowel(count_updown):
         vowel_index = jungsung[count_updown]
         
         
+                #음성출력 코드 추가하기
         return vowel_index
         
         

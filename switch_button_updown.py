@@ -1,3 +1,6 @@
+#-*-coding: utf-8-*-
+
+#-*-coding: euc-kr-*-
 
 #위 아래 버튼 눌렀을 때 updown_count 숫자 조정
 

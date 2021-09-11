@@ -1,14 +1,19 @@
-# import switch_jamo_assemble
+#-*-coding: utf-8-*-
+
+#-*-coding: euc-kr-*-
+
+import switch_jamo_assemble
 from jamo import h2j, j2hcj
-import math
+from hangul_utils import join_jamos
 
 
 
+b = []
+
+gyup = ''
 
 # #test
-# sung_index_1 = ['ㄱ','ㅘ','ㄱ']
-# num  = 1524
-
+# sung_index_1 = ['ㄱ','ㅘ','ㄱ']d
 
 # #test        
 # a = switch_jamo_assemble.jamo_assemble(sung_index_1)
@@ -16,46 +21,63 @@ import math
 
 # a = j2hcj(h2j(a))
 # print(a)
+# list2 = list(a)
+# print(list2)
+# list3 = list[:-1]
+# print(list3)
 # a = a[:-1]
 # print(a)
 
+#test
+num_input = 302
+jamo_join_input = '김범준'
 # input mode 에 따라 함수 다르게
 
 
-def push_Button_revise_sung(jamo_join_input_index):                          # 글자 해체해서 마지막 글자 지우기 
-    
-    jamo_join_input = ''.join(jamo_join_input_index)
+def push_Button_revise_sung(jamo_join_input):
     
     jamo_join_input = j2hcj(h2j(jamo_join_input))
-    jamo_join_input = jamo_join_input[:-1]
     
+    
+    # list2 = list(jamo_join_input)
+    # list3 = list[:-1]
+    # jamo_join_input = jamo_join_input[:-1]
+    
+    
+    size = len(jamo_join_input)                     # len 문자열 길이 설정
+    jamo_join_input = jamo_join_input[:size - 1]
+    jamo_join_input = join_jamos(jamo_join_input)
+        
     return jamo_join_input
     
     
-def push_Button_revise_num(num_input):                                  # num_input받아서 1의 자릿수 내림 
+def push_Button_revise_num(num_input):
     
-    num_input_revise = num_input / 10
-    num_input_revise = math.floor(num_input_revise)
-    num_input = num_input_revise
+    a = []
+    for i in str(num_input):
+        a.append(i)
+        
+    size = len(a)                           
+    num_input = a[:size - 1]
     
+    b = ''.join(num_input)
+    
+    num_input = int(b)
+                
     return num_input
 
 
-##글자지우기 test
-# aa = push_Button_revise_sung(a)
-# print(aa)
+
+
+# #test
+# print(num_input)
+# print(push_Button_revise_num(num_input))
 
 
 
-# #숫자 지우기 test
-# bb = push_Button_revise_num(num)
-# print(bb)
-
-# bb = push_Button_revise_num(bb)
-# print(bb)
+# print(jamo_join_input)
+# jamo_join_input = push_Button_revise_sung(jamo_join_input)
+# print(jamo_join_input)
 
 
-# cc = num/10
-# cc = math.floor(cc)
-# num = cc * 10
-# print(num)
+# print(push_Button_revise_sung(jamo_join_input))
