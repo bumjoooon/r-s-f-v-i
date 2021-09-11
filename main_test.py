@@ -47,10 +47,10 @@ jongsung = ['ㄱ','ㄲ','ㄳ','ㄴ','ㄵ','ㄶ','ㄷ','ㄹ','ㄺ','ㄻ','ㄼ','�
 #한글 유니코드 다 적어야 하나??
 hangul = []
 
-jamo_join_final_1 = 0
-jamo_join_final_2 = 0
-jamo_join_final_3 = 0
-jamo_join_final_4 = 0
+jamo_join_final_1 = ''
+jamo_join_final_2 = ''
+jamo_join_final_3 = ''
+jamo_join_final_4 = ''
 
 jamo_index = []
 jamo_join_input = ''            #다음버튼 누르면 어딘가에 저장될 최종 문자
@@ -137,6 +137,8 @@ try:
                                 
                 if keyboard.read_key() == Button_input:
                         
+                        print('Button_input is pushed')
+                        
                         #count_updown 숫자에 따라 자음 설정
                         if input_mode == 1 :
                                 
@@ -184,45 +186,61 @@ try:
                         
                                               
                         #글자가 완성되면 jamo_join_input_index에 저장                                           #!!!!테스트가 필요하다!!!!
-                        if ord(jamo_join_final_4) >= 44032 and ord(jamo_join_final_4) <= 55203:
-                                                                            
-                                jamo_join_input= jamo_join_final_4
-                                
-                                jamo_join_final_4 = ''
-                                jamo_join_final_3 = ''
-                                jamo_join_final_2 = ''
-                                jamo_join_final_1 = ''
-                                
-                        elif ord(jamo_join_final_3) >= 44032 and ord(jamo_join_final_3) <= 55203:
-                                
-                                jamo_join_input= jamo_join_final_3
-                                
-                                jamo_join_final_3 = ''
-                                jamo_join_final_2 = ''
-                                jamo_join_final_1 = ''
-                                
-                        elif ord(jamo_join_final_2) >= 44032 and ord(jamo_join_final_2) <= 55203:
-                                
-                                jamo_join_input= jamo_join_final_2
-                                
-                                jamo_join_final_2 = ''
-                                jamo_join_final_1 = ''
-                                
-                        elif ord(jamo_join_final_1) >= 44032 and ord(jamo_join_final_1) <= 55203:                       #없어도 될듯???
-                                
-                                jamo_join_input= jamo_join_final_1
-                                jamo_join_input_index.append(jamo_join_input)
-                                
-                                jamo_join_final_1 = ''        
-
-                        else :
-                                pass                                                                                   #jamo_join_input에 들어갈 것 저장완료
+                        if jamo_join_final_1 != '' and jamo_join_final_2 != '' and jamo_join_final_3 != '' and jamo_join_final_4 != '' :
                         
+                                if ord(jamo_join_final_4) >= 44032 and ord(jamo_join_final_4) <= 55203:
+                                                                                
+                                        jamo_join_input= jamo_join_final_4
+                                        
+                                        jamo_join_final_4 = ''
+                                        jamo_join_final_3 = ''
+                                        jamo_join_final_2 = ''
+                                        jamo_join_final_1 = ''
+                                        
+                                        jamo_join_input = ''
+                                        
+                                elif ord(jamo_join_final_3) >= 44032 and ord(jamo_join_final_3) <= 55203:
+                                        
+                                        jamo_join_input= jamo_join_final_3
+                                        
+                                        jamo_join_final_3 = ''
+                                        jamo_join_final_2 = ''
+                                        jamo_join_final_1 = ''
+                                        
+                                        jamo_join_input = ''
+                                        
+                                elif ord(jamo_join_final_2) >= 44032 and ord(jamo_join_final_2) <= 55203:
+                                        
+                                        jamo_join_input= jamo_join_final_2
+                                        
+                                        jamo_join_final_2 = ''
+                                        jamo_join_final_1 = ''
+                                        
+                                        jamo_join_input = ''
+                                        
+                                elif ord(jamo_join_final_1) >= 44032 and ord(jamo_join_final_1) <= 55203:                       #없어도 될듯???
+                                        
+                                        jamo_join_input= jamo_join_final_1
+                                                                                
+                                        jamo_join_final_1 = ''
+                                        
+                                        jamo_join_input = ''
+                                                
+
+                                else :
+                                        continue                                                                                   #jamo_join_input에 들어갈 것 저장완료
+                        
+                        else :
+                                pass
                         
                         
                         jamo_join_input_index.append(jamo_join_input)                                                   #jamo_join_input을 jamo_join_input_index에 저장
 
                         count_updown = 0
+                        print('jamo_join_input : ',jamo_join_input)
+                        print('num_input:',num_input)
+                        print('count_updown: ',count_updown)
+                        print('jamo_join_input_index:',jamo_join_input_index)
                         sleep(0.5)
                 
 
@@ -235,16 +253,18 @@ try:
                         
                         if input_mode == 1:
                                 sung = switch_button_input.push_Button_input_conso(count_updown)
+                                print('sung:',sung)
                                 #sung 읽어주기
                            
                                 
                         elif input_mode == 2:
                                 sung = switch_button_input.push_Button_input_vowel(count_updown)
+                                print('sung:',sung)
                                 #sung 읽어주기
                                 
                                 
                         else :
-                                pass                                                               #아님 .수정해야됨!!!
+                                print('count_updown:',count_updown)                                                               #아님 .수정해야됨!!!
                                 #count_updown 읽어주기
                                 
                                 
@@ -253,16 +273,19 @@ try:
 
                         if input_mode == 1:
                                 sung = switch_button_input.push_Button_input_conso(count_updown)
+                                print('sung:',sung)
                                 #sung 읽어주기
                            
                                 
                         elif input_mode == 2:
                                 sung = switch_button_input.push_Button_input_vowel(count_updown)
+                                print('sung:',sung)
                                 #sung 읽어주기
                                 
                                 
                         else :
-                                pass                                   #!!!!수정해야됨!! 임시로 적어둔 것
+                                print('count_updown:',count_updown) 
+                                                                   #!!!!수정해야됨!! 임시로 적어둔 것
                                 #count_updown 읽어주기
                 
                 
@@ -314,9 +337,9 @@ try:
                 #         GPIO.output(LED, False)
                 #         print ("Button was Not Pressed!")
                         
-                print('num_input:',num_input)
-                print('jamo_join_input:',jamo_join_input)
                 
+                
+                                
                 sleep(0.1)
                 
                 
