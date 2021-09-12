@@ -2,6 +2,7 @@
 
 #-*-coding: euc-kr-*-
 
+
 from switch_jamo_assemble import jamo_assemble
 import RPi.GPIO as GPIO      # gpio 라이브러리
 from time import sleep       # sleep 라이브러리
@@ -318,9 +319,7 @@ try:
                         else :
                                 pass
                                 
-                else:
-                        pass
-                
+                                
                 
                 
                 if GPIO.event_detected(Button_next):
@@ -352,6 +351,7 @@ try:
                         print('num_input_save : ', num_input_save)
                 
                 
+                
                 if GPIO.event_detected(Button_back):
                         #step 내리기!!
                         
@@ -368,8 +368,14 @@ try:
                                 num_input = 0
                                 
                                 count_updown = 0
-                
-                
+                                
+                        print('jamo_join_input 5 : ',jamo_join_input)
+                        print('jamo_join_input_index : ',jamo_join_input_index)
+                        print('jamo_join_input_save',jamo_join_input_save)
+                        print('jamo_join_input_index_save : ',jamo_join_input_index_save)
+                        
+                        print('num_input : ',num_input)
+                        print('num_input_save : ', num_input_save)
                 
                 
                 
