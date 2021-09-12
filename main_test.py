@@ -418,6 +418,9 @@ try:
                 
                 
                 if keyboard.read_key() ==Button_next:
+                        
+                        #step 올리기
+                        
                         if jamo_join_input != '' or jamo_join_input_index != []:
                                 jamo_join_input_save = jamo_join_input
                                 jamo_join_input_index_save = jamo_join_input_index
@@ -429,6 +432,23 @@ try:
 
                         else :
                                 num_input_save = num_input
+        
+                                num_input = 0
+                                
+                                count_updown = 0
+                                
+                if keyboard.read_key() == Button_back:
+                        #step 내리기!!
+                        
+                        if jamo_join_input_save != '' or jamo_join_input_index_save != []:
+                                print(''.join(jamo_join_input_index_save))
+                                #jamo_join_input_index_save 읽어주기?? 내용 어떻게 할지 생각
+                                
+                                count_updown = 0
+
+                        else :
+                                print(num_input_save)
+                                #num_input_save 읽어주기?? 내용 어떻게 할지 생각해보자
         
                                 num_input = 0
                                 

@@ -409,5 +409,5 @@ try:
 except KeyboardInterrupt:      # CTRL-C를 누르면 발생 
         print('finish')
         GPIO.cleanup()  #cleanup변수 뭔지 알아보기 
-        
+        quit()
         
