@@ -2,6 +2,7 @@
 
 #-*-coding: euc-kr-*-
 
+
 #import RPi.GPIO as GPIO      # gpio 라이브러리
 from time import sleep       # sleep 라이브러리
 from hangul_utils import join_jamos 
