@@ -1,3 +1,9 @@
+from jamo import j2h 
+from jamo import j2hcj
+
+from jamo import h2j, j2hcj
+
+
 a = ord('ㄱ')
 print(a)
 
@@ -30,6 +36,26 @@ print(a)
 
 # a = ord('궁ㄴ')
 # print(a)
+
+a = h2j('갅')
+print(a)
+
+a = j2hcj(h2j('간'))
+print('a:',a)
+
+b = ['ㄱ','ㅏ','ㄴ']
+c = ''.join(b)
+print('c:',c)
+
+if a == c:
+    print('a==c')
+else:
+    print('nope')
+    pass
+
+
+# a = len('궁ㄴ')
+# print('len:',a)
 
 
 

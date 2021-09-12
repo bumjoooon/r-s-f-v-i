@@ -27,11 +27,13 @@ Button_back = 13      #뒤로/다시 버튼, 33
 Button_next = 19      #다음/네 버튼, 35
 
 input_mode = 0        #mode  1: 자음 2: 모음 3: 숫자
-num_size = 0          #방향키로 조절할 숫자의 최대
+num_size = 2          #방향키로 조절할 숫자의 최대, 그때 그때 받아오기
 
 count_updown = 0        #방향키로 조절할 때 조절될 숫자
 
-num_input = 0
+
+num_input = 0           #입력 버튼 -  저장될 값
+num_input_save = 0      #다음 버튼 - 저장될 값
 
 chosung_index = ""       #문자열로 선언 해주어야 하나
 jungsung_index = ""
@@ -57,9 +59,10 @@ jamo_join_final_3 = ''
 jamo_join_final_4 = ''
 
 jamo_index = []
-jamo_join_input = ''            #다음버튼 누르면 어딘가에 저장될 최종 문자
-jamo_join_input_index = []      #글자가 완성되면 저장
-
+jamo_join_input = ''            #입력버튼 - 저장될 문자
+jamo_join_input_index = []      #입력버튼 - 글자가 완성되면 저장
+jamo_join_input_save = ''       #다음버튼 - 저장될 문자
+jamo_join_input_index_save = [] #다음버튼 - 저장될 문자
 
 
 
@@ -137,6 +140,7 @@ try:
                 
                                 
                 if GPIO.event_detected(Button_input):
+                        
                         print('Button_input is pushed')
                         
                         if input_mode == 1 :
@@ -178,7 +182,7 @@ try:
                                 
                         else  :                 #자음,모음 아니면 무조건 숫자로 받게
                                 num_input = switch_button_input.push_Button_input_num(num_input,count_updown)                   #num_input이 처음엔 빈 공백으로 있으면 어떻게 되는가???
-                                #input_num 읽어주기
+                                #num_input 읽어주기
                         
                                 
                         
@@ -188,6 +192,7 @@ try:
                                 if ord(jamo_join_final_4) >= 44032 and ord(jamo_join_final_4) <= 55203:
                                                                                 
                                         jamo_join_input= jamo_join_final_4
+                                        jamo_join_input_index[:-1]
                                         
                                         jamo_join_final_4 = ''
                                         jamo_join_final_3 = ''
@@ -198,6 +203,7 @@ try:
                                 elif ord(jamo_join_final_3) >= 44032 and ord(jamo_join_final_3) <= 55203:
                                         
                                         jamo_join_input= jamo_join_final_3
+                                        jamo_join_input_index[:-1]
                                         
                                         jamo_join_final_3 = ''
                                         jamo_join_final_2 = ''
@@ -208,6 +214,7 @@ try:
                                 elif ord(jamo_join_final_2) >= 44032 and ord(jamo_join_final_2) <= 55203:
                                         
                                         jamo_join_input= jamo_join_final_2
+                                        jamo_join_input_index[:-1]
                                         
                                         jamo_join_final_2 = ''
                                         jamo_join_final_1 = ''
@@ -216,6 +223,7 @@ try:
                                 elif ord(jamo_join_final_1) >= 44032 and ord(jamo_join_final_1) <= 55203:                       #없어도 될듯???
                                         
                                         jamo_join_input= jamo_join_final_1
+                                        jamo_join_input_index[:-1]                                              #테스트 필요함
                                                                                 
                                         jamo_join_final_1 = ''
                                         
@@ -225,7 +233,12 @@ try:
                                         
                                               
                         print('jamo_join_input:',jamo_join_input)
-                        jamo_join_input_index.append(jamo_join_input)                                                   #jamo_join_input을 jamo_join_input_index에 저장
+                        if jamo_join_input != '':                                                                      #글자 완성됐을 떄만 인덱스에 추가
+                                jamo_join_input_index.append(jamo_join_input)                                                   #jamo_join_input을 jamo_join_input_index에 저장
+                        else:
+                                pass
+                                                                                                          #jamo_join_input을 jamo_join_input_index에 저장
+                        print('jamo_join_input_index : ',jamo_join_input_index)
                         jamo_join_input = ''
                         
                         count_updown = 0
@@ -268,66 +281,133 @@ try:
                         count_updown = count_updown - 1
 
                         if input_mode == 1:
+                                count_updown = count_updown % 19 
                                 sung = switch_button_input.push_Button_input_conso(count_updown)
+                                print('sung:',sung)
                                 #sung 읽어주기
+                                
                            
                                 
                         elif input_mode == 2:
+                                count_updown = count_updown % 21
                                 sung = switch_button_input.push_Button_input_vowel(count_updown)
+                                print('sung:',sung)
                                 #sung 읽어주기
                                 
                                 
                         else :
-                                pass                   #!!!!수정해야됨!!!!! 임시로 적어둔 것
+                                count_updown = count_updown % num_size  
+                                print('count_updown:',count_updown)     #!!!!수정해야됨!! 임시로 적어둔 것
                                 #count_updown 읽어주기
+                                
                 
                 
                 
                 
                 if GPIO.event_detected(Button_revise):
-                
-                
-                
-                
-                
-                
-                
-                
-                
-                if GPIO.input(Button_start) == 0: #누를 때 button신호 0
-                        count_updown = 0
-                        
-                        GPIO.add_event_detect(Button_up, GPIO.RISING, callback=count_up, bouncetime=300) # Botton_up이 rising될때 count_up함수 호출, 디바운싱 300
-                        GPIO.remove_event_detect(Button_up)
-                        
-                        GPIO.add_event_detect(Button_down, GPIO.RISING, callback=count_down, bouncetime=300)
-                        GPIO.remove_event_detect(Button_down)
-                        
-                        GPIO.add_event_detect(Button_input, GPIO.RISING, callback=count_input, bouncetime=300)
-                        GPIO.remove_event_detect(Button_input)
-                        
-                        
-                        GPIO.add_event_detect(Button_conso, GPIO.RISING, callback=push_Button_conso, bouncetime=300)
-                        input_mode = push_Button_conso()                        # input_mode값 1인지 확인
-                        input_mode = callback                                   # input_mode값 1인지 확인
+                        if jamo_join_input_index != []:
+                                jamo_join_input = switch_button_revise.push_Button_revise_sung(jamo_join_input_index)
+                                print(jamo_join_input)
                                 
-                        GPIO.remove_event_detect(Button_conso)
+                                
+                                
+                        elif  num_input != 0:
+                                num_input = switch_button_revise.push_Button_revise_num(num_input)
+                                print(num_input)
+                                
+                        else :
+                                pass
+                                
+                else:
+                        pass
+                
+                
+                
+                if GPIO.event_detected(Button_next):
+                        
+                        #step 올리기!!   
+                        
+                        if jamo_join_input != '' or jamo_join_input_index != []:
+                                jamo_join_input_save = jamo_join_input
+                                jamo_join_input_index_save = jamo_join_input_index
+                                
+                                jamo_join_input = ''
+                                jamo_join_input_index = []
+                                
+                                count_updown = 0
+
+                        else :
+                                num_input_save = num_input
+        
+                                num_input = 0
+                                
+                                count_updown = 0
+                
+                        print('jamo_join_input : ',jamo_join_input)
+                        print('jamo_join_input_index : ',jamo_join_input_index)
+                        print('jamo_join_input_save',jamo_join_input_save)
+                        print('jamo_join_input_index_save : ',jamo_join_input_index_save)
+                        
+                        print('num_input : ',num_input)
+                        print('num_input_save : ', num_input_save)
+                
+                
+                if GPIO.event_detected(Button_back):
+                        #step 내리기!!
+                        
+                        if jamo_join_input_save != '' or jamo_join_input_index_save != []:
+                                print(''.join(jamo_join_input_index_save))
+                                #jamo_join_input_index_save 읽어주기?? 내용 어떻게 할지 생각
+                                
+                                count_updown = 0
+
+                        else :
+                                print(num_input_save)
+                                #num_input_save 읽어주기?? 내용 어떻게 할지 생각해보자
+        
+                                num_input = 0
+                                
+                                count_updown = 0
+                
+                
+                
+                
+                
+                # if GPIO.input(Button_start) == 0: #누를 때 button신호 0
+                #         count_updown = 0
+                        
+                #         GPIO.add_event_detect(Button_up, GPIO.RISING, callback=count_up, bouncetime=300) # Botton_up이 rising될때 count_up함수 호출, 디바운싱 300
+                #         GPIO.remove_event_detect(Button_up)
+                        
+                #         GPIO.add_event_detect(Button_down, GPIO.RISING, callback=count_down, bouncetime=300)
+                #         GPIO.remove_event_detect(Button_down)
+                        
+                #         GPIO.add_event_detect(Button_input, GPIO.RISING, callback=count_input, bouncetime=300)
+                #         GPIO.remove_event_detect(Button_input)
+                        
+                        
+                #         GPIO.add_event_detect(Button_conso, GPIO.RISING, callback=push_Button_conso, bouncetime=300)
+                #         input_mode = push_Button_conso()                        # input_mode값 1인지 확인
+                #         input_mode = callback                                   # input_mode값 1인지 확인
+                                
+                #         GPIO.remove_event_detect(Button_conso)
                         
                         
                         
 
                          
-                        GPIO.output(LED, True)
+                #         GPIO.output(LED, True)
                                                                               
-                else:
-                        GPIO.output(LED, False)
-                        print ("Button was Not Pressed!")
+                # else:
+                #         GPIO.output(LED, False)
+                #         print ("Button was Not Pressed!")
                         
-                sleep(1)
+                sleep(0.1)                                                                                                                #!!슬립시간 조절!!
                 
                 
                 
 except KeyboardInterrupt:      # CTRL-C를 누르면 발생 
+        print('finish')
         GPIO.cleanup()  #cleanup변수 뭔지 알아보기 
         
         

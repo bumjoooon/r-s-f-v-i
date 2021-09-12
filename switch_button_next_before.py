@@ -1,3 +1,7 @@
+#-*-coding: utf-8-*-
+
+#-*-coding: euc-kr-*-
+
 # import switch_main
 import main_test
 
