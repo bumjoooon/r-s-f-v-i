@@ -2,7 +2,6 @@
 
 #-*-coding: euc-kr-*-
 
-
 # import switch_main
 # import switch_input
 
