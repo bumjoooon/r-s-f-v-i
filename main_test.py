@@ -2,6 +2,7 @@
 
 #-*-coding: euc-kr-*-
 
+
 import jamo
 from switch_jamo_assemble import jamo_assemble
 #import RPi.GPIO as GPIO      # gpio 라이브러리
@@ -437,6 +438,15 @@ try:
                                 
                                 count_updown = 0
                                 
+                        print('jamo_join_input 5 : ',jamo_join_input)
+                        print('jamo_join_input_index : ',jamo_join_input_index)
+                        print('jamo_join_input_save',jamo_join_input_save)
+                        print('jamo_join_input_index_save : ',jamo_join_input_index_save)
+                        
+                        print('num_input : ',num_input)
+                        print('num_input_save : ', num_input_save)
+                        
+                                
                 if keyboard.read_key() == Button_back:
                         #step 내리기!!
                         
@@ -505,9 +515,4 @@ except KeyboardInterrupt:      # CTRL-C를 누르면 발생
         quit()
         
 
-
-        
-# if keyboard.read_key() == 'q':
-#         print('quit')
-#         quit()
-        
+       
