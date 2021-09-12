@@ -2,6 +2,7 @@
 
 #-*-coding: euc-kr-*-
 
+
 import switch_jamo_assemble
 from jamo import h2j, j2hcj
 from hangul_utils import join_jamos
@@ -53,16 +54,24 @@ def push_Button_revise_sung(jamo_join_input):
     
 def push_Button_revise_num(num_input):
     
+    
     a = []
     for i in str(num_input):
         a.append(i)
+            
+    if len(a) != 1 :    
+        size = len(a)                           
+        num_input = a[:size - 1]
+    
+        b = ''.join(num_input)
+    
+        num_input = int(b)
+    
+    elif len(a) == 1:
+        num_input = 0
         
-    size = len(a)                           
-    num_input = a[:size - 1]
-    
-    b = ''.join(num_input)
-    
-    num_input = int(b)
+    else:
+        pass
                 
     return num_input
 
