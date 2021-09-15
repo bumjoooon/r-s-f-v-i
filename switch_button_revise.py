@@ -78,15 +78,15 @@ def push_Button_revise_num(num_input):
 
 
 
-# #test
-# print(num_input)
-# print(push_Button_revise_num(num_input))
+#test
+print(num_input)
+print(push_Button_revise_num(num_input))
 
 
 
-# print(jamo_join_input)
-# jamo_join_input = push_Button_revise_sung(jamo_join_input)
-# print(jamo_join_input)
+print(jamo_join_input)
+jamo_join_input = push_Button_revise_sung(jamo_join_input)
+print(jamo_join_input)
 
 
-# print(push_Button_revise_sung(jamo_join_input))
+print(push_Button_revise_sung(jamo_join_input))

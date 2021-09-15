@@ -28,7 +28,7 @@ Button_back = 13      #뒤로/다시 버튼, 33
 Button_next = 19      #다음/네 버튼, 35
 
 input_mode = 0        #mode  1: 자음 2: 모음 3: 숫자
-num_size = 2          #방향키로 조절할 숫자의 최대, 그때 그때 받아오기
+# num_size = 2          #방향키로 조절할 숫자의 최대, 그때 그때 받아오기
 
 count_updown = 0        #방향키로 조절할 때 조절될 숫자
 
@@ -64,6 +64,12 @@ jamo_join_input = ''            #입력버튼 - 저장될 문자
 jamo_join_input_index = []      #입력버튼 - 글자가 완성되면 저장
 jamo_join_input_save = ''       #다음버튼 - 저장될 문자
 jamo_join_input_index_save = [] #다음버튼 - 저장될 문자
+
+jamo_join_input_save = ''
+jamo_join_input_index_save = []
+jamo_join_input_index_save_index = []
+
+adress_input = []
 
 
 
@@ -121,7 +127,6 @@ try:
         while True:
                 
                 
-                # 버튼이 눌릴 때 실행할 것들
                 if GPIO.event_detected(Button_conso):
                         input_mode = 1
                         count_updown = 0
@@ -187,58 +192,94 @@ try:
                         
                                 
                         
-                        #글자가 완성되면 jamo_join_input_index에 저장                                           #!!!!테스트가 필요하다!!!!
-                        if jamo_join_final_1 != '' and jamo_join_final_2 != '' and jamo_join_final_3 != '' and jamo_join_final_4 != '' :
+                        if len(sung_index_1) == 4:    
+                                if sung_index_1[3] in jungsung:
+                                        
+                                        sung_index_1 = sung_index_1[:2]
+                                        jamo_join_final_1 = switch_jamo_assemble.jamo_assemble(sung_index_1)
+                                        jamo_join_input_index = jamo_join_input_index[:-1]
+                                        jamo_join_input_index.append(jamo_join_final_1)
+                                        
+                                        
+                                        sung_index_1 = sung_index_2[2:]
+                                        sung_index_2 = sung_index_2[2:]
+                                        sung_index_3 = sung_index_2[2:]
+                                        sung_index_4 = sung_index_2[2:]
+                                        jamo_join_final_2 = switch_jamo_assemble.jamo_assemble(sung_index_2)
+                                        jamo_join_input_index.append(jamo_join_final_2)
+                                        
+                                
+                                                        
+                                        
+                                else:
+                                        jamo_join_input_index = jamo_join_input_index[:-1]
+                                        jamo_join_input_index.append(jamo_join_final_1)
+                                        
+                        elif len(sung_index_1) == 5:               
+                                if sung_index_1[4] in jungsung:
+                                        
+                                        sung_index_2 = sung_index_2[:3]
+                                        jamo_join_final_2 = switch_jamo_assemble.jamo_assemble(sung_index_2)
+                                        print('jjjjamo_join_final_2',jamo_join_final_2)
+                                        jamo_join_input_index = jamo_join_input_index[:-1]
+                                        jamo_join_input_index.append(jamo_join_final_2)
+                                        sung_index_1 = sung_index_3[3:]
+                                        sung_index_2 = sung_index_3[3:]
+                                        sung_index_3 = sung_index_3[3:]
+                                        sung_index_4 = sung_index_3[3:]
+                                        jamo_join_final_1 = switch_jamo_assemble.jamo_assemble(sung_index_1)
+                                        jamo_join_input_index.append(jamo_join_final_1)
+                                
+                                elif sung_index_1[4] in chosung:
+                                        
+                                        sung_index_1 = sung_index_1[:4]
+                                        jamo_join_final_4 = switch_jamo_assemble.jamo_assemble(sung_index_1)
+                                        print('jjjjamo_join_final_4',jamo_join_final_4)
+                                        jamo_join_input_index = jamo_join_input_index[:-1]
+                                        jamo_join_input_index.append(jamo_join_final_4)
+                                        sung_index_1 = sung_index_3[4:]
+                                        sung_index_2 = sung_index_3[4:]
+                                        sung_index_3 = sung_index_3[4:]
+                                        sung_index_4 = sung_index_3[4:]
+                                        jamo_join_final_1 = switch_jamo_assemble.jamo_assemble(sung_index_1)
+                                        jamo_join_input_index.append(jamo_join_final_1)
+                                        
+                                
+                                else:
+                                        jamo_join_input_index = jamo_join_input_index[:-1]
+                                        jamo_join_input_index.append(jamo_join_final_1)
                         
-                                if ord(jamo_join_final_4) >= 44032 and ord(jamo_join_final_4) <= 55203:
-                                                                                
-                                        jamo_join_input= jamo_join_final_4
-                                        jamo_join_input_index[:-1]
+                        elif  len(sung_index_2)==6:      
+                                if sung_index_2[5] in jungsung:
                                         
-                                        jamo_join_final_4 = ''
-                                        jamo_join_final_3 = ''
-                                        jamo_join_final_2 = ''
-                                        jamo_join_final_1 = ''
-                                        
-                                                                                
-                                elif ord(jamo_join_final_3) >= 44032 and ord(jamo_join_final_3) <= 55203:
-                                        
-                                        jamo_join_input= jamo_join_final_3
-                                        jamo_join_input_index[:-1]
-                                        
-                                        jamo_join_final_3 = ''
-                                        jamo_join_final_2 = ''
-                                        jamo_join_final_1 = ''
-                                        
-                                        
-                                        
-                                elif ord(jamo_join_final_2) >= 44032 and ord(jamo_join_final_2) <= 55203:
-                                        
-                                        jamo_join_input= jamo_join_final_2
-                                        jamo_join_input_index[:-1]
-                                        
-                                        jamo_join_final_2 = ''
-                                        jamo_join_final_1 = ''
-                                        
-                                                                                
-                                elif ord(jamo_join_final_1) >= 44032 and ord(jamo_join_final_1) <= 55203:                       #없어도 될듯???
-                                        
-                                        jamo_join_input= jamo_join_final_1
-                                        jamo_join_input_index[:-1]                                              #테스트 필요함
-                                                                                
-                                        jamo_join_final_1 = ''
-                                        
+                                        sung_index_3 = sung_index_3[:3]
+                                        jamo_join_final_3 = switch_jamo_assemble.jamo_assemble(sung_index_3)
+                                        print('jamo_join_final_3:',jamo_join_final_3)
+                                        jamo_join_input_index = jamo_join_input_index[:-1]
+                                        jamo_join_input_index.append(jamo_join_final_1)
+                                        sung_index_1 = sung_index_2[4:]
+                                        sung_index_2 = sung_index_2[4:]
+                                        sung_index_3 = sung_index_2[4:]
+                                        sung_index_4 = sung_index_2[4:]
+                                        jamo_join_final_1 = switch_jamo_assemble.jamo_assemble(sung_index_1)
+                                        jamo_join_input_index.append(jamo_join_final_1)
                                 else :
-                                        pass
+                                        jamo_join_input_index = jamo_join_input_index[:-1]
+                                        jamo_join_input_index.append(jamo_join_final_1)
+                                       
+                                        
+                        else : 
+                                if len(sung_index_1) == 1:
+                                        jamo_join_input_index.append(jamo_join_final_1)
+                                else:
+                                        jamo_join_input_index = jamo_join_input_index[:-1]
+                                        jamo_join_input_index.append(jamo_join_final_1)
+                        
                                     
                                         
                                               
                         print('jamo_join_input:',jamo_join_input)
-                        if jamo_join_input != '':                                                                      #글자 완성됐을 떄만 인덱스에 추가
-                                jamo_join_input_index.append(jamo_join_input)                                                   #jamo_join_input을 jamo_join_input_index에 저장
-                        else:
-                                pass
-                                                                                                          #jamo_join_input을 jamo_join_input_index에 저장
+                                                                                             #jamo_join_input을 jamo_join_input_index에 저장
                         print('jamo_join_input_index : ',jamo_join_input_index)
                         jamo_join_input = ''
                         
@@ -250,6 +291,8 @@ try:
                         print('jamo_join_input_index:',jamo_join_input_index)
                         sleep(0.5)
                 
+                else:
+                        pass
                 
                 
                 #button_up&down부분
@@ -328,7 +371,10 @@ try:
                         
                         if jamo_join_input != '' or jamo_join_input_index != []:
                                 jamo_join_input_save = jamo_join_input
+                                
                                 jamo_join_input_index_save = jamo_join_input_index
+                                jamo_join_input_index_save_index = jamo_join_input_index
+                                jamo_join_input_index_save = ''.join(jamo_join_input_index)
                                 
                                 jamo_join_input = ''
                                 jamo_join_input_index = []
@@ -356,6 +402,7 @@ try:
                         #step 내리기!!
                         
                         if jamo_join_input_save != '' or jamo_join_input_index_save != []:
+                                jamo_join_input_index = jamo_join_input_index_save_index
                                 print(''.join(jamo_join_input_index_save))
                                 #jamo_join_input_index_save 읽어주기?? 내용 어떻게 할지 생각
                                 
@@ -365,7 +412,7 @@ try:
                                 print(num_input_save)
                                 #num_input_save 읽어주기?? 내용 어떻게 할지 생각해보자
         
-                                num_input = 0
+                                num_input = num_input_save
                                 
                                 count_updown = 0
                                 
@@ -377,43 +424,13 @@ try:
                         print('num_input : ',num_input)
                         print('num_input_save : ', num_input_save)
                 
-                
-                
-                # if GPIO.input(Button_start) == 0: #누를 때 button신호 0
-                #         count_updown = 0
-                        
-                #         GPIO.add_event_detect(Button_up, GPIO.RISING, callback=count_up, bouncetime=300) # Botton_up이 rising될때 count_up함수 호출, 디바운싱 300
-                #         GPIO.remove_event_detect(Button_up)
-                        
-                #         GPIO.add_event_detect(Button_down, GPIO.RISING, callback=count_down, bouncetime=300)
-                #         GPIO.remove_event_detect(Button_down)
-                        
-                #         GPIO.add_event_detect(Button_input, GPIO.RISING, callback=count_input, bouncetime=300)
-                #         GPIO.remove_event_detect(Button_input)
-                        
-                        
-                #         GPIO.add_event_detect(Button_conso, GPIO.RISING, callback=push_Button_conso, bouncetime=300)
-                #         input_mode = push_Button_conso()                        # input_mode값 1인지 확인
-                #         input_mode = callback                                   # input_mode값 1인지 확인
-                                
-                #         GPIO.remove_event_detect(Button_conso)
-                        
-                        
-                        
-
-                         
-                #         GPIO.output(LED, True)
-                                                                              
-                # else:
-                #         GPIO.output(LED, False)
-                #         print ("Button was Not Pressed!")
-                        
+                                        
                 sleep(0.1)                                                                                                                #!!슬립시간 조절!!
                 
                 
                 
 except KeyboardInterrupt:      # CTRL-C를 누르면 발생 
         print('finish')
-        GPIO.cleanup()  #cleanup변수 뭔지 알아보기 
+        GPIO.cleanup()   
         quit()
         
